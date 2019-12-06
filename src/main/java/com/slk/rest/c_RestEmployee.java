@@ -33,7 +33,7 @@ public class c_RestEmployee {
 	{
 		return employeeDaoimpl.list();
 	}
-	@GetMapping("/c_customer/{id}")
+	@GetMapping("/c_customer")
 	public List getCustomer() throws SQLException
 	{
 		return employeeDaoimpl.getAllCustomer();
