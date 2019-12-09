@@ -11,6 +11,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+
 import com.slk.model.c_Customer;
 import com.slk.model.c_Employee;
 import com.slk.model.c_Transaction;
@@ -39,9 +40,9 @@ import com.slk.util.c_SDBUtil;
 			
 		}
 		
-		public List<c_Customer> getAllCustomer() throws SQLException {
+		public List<c_Customer> getAllCustomer(String id) throws SQLException {
 			// TODO Auto-generated method stub
-			String query1="select * from c_customer";
+			String query1="select account_no,c.name,c.dob,c.phone_no,c.username,c.password,c.amount,b.branch_name,l.loan_type,ac.ac_type,c.aadhar,c.pan,c.action from c_customer c,c_agent a,c_branch b,c_loan l,c_account ac where c.branch_id=b.branch_id and b.branch_id=a.branch_id and ac.type_id=c.type_id and l.loan_id=c.loan_id and a.username='"+id+"'";
 			Statement st1=con.createStatement();
 			ResultSet rs=st1.executeQuery(query1);
 			List<c_Customer> l=new ArrayList<c_Customer>();
@@ -55,7 +56,7 @@ import com.slk.util.c_SDBUtil;
 		         c.setUsername(rs.getString(5));
 		         c.setPassword(rs.getString(6));
 		         c.setAmount(rs.getFloat(7));
-		         c.setBranch(rs.getInt(8));
+		         c.setBranch(rs.getString(8));
 		         c.setLoan_type(rs.getString(9));
 		         c.setAcc_type(rs.getString(10));
 		         c.setAadhar_card(rs.getLong(11));
@@ -66,21 +67,22 @@ import com.slk.util.c_SDBUtil;
 		    }
 		return l;
 	}
-		public List<c_Transaction> getAllTransaction() throws SQLException {
+		public List<c_Transaction> getAllTransaction(String id) throws SQLException {
 			// TODO Auto-generated method stub
 			
-			String query1="select * from c_transaction";
+			
+			String query1="select distinct(c.account_no),t.trans_date,t.credit,t.debit from c_customer c,c_agent a,c_branch b,c_transaction t where c.branch_id=b.branch_id and b.branch_id=a.branch_id and c.account_no=t.account_no and a.username='"+id+"'";
 			Statement st1=con.createStatement();
 			ResultSet rs=st1.executeQuery(query1);
 			List<c_Transaction> tt=new ArrayList<c_Transaction>();
 			while(rs.next())
 			{
 				c_Transaction t=new c_Transaction();
-				t.setTrans_id(rs.getInt(1));
+				t.setTrans_acc_no(rs.getLong(1));
 				t.setTrans_date(rs.getString(2));
 				t.setTrans_credit(rs.getFloat(3));
 				t.setTrans_debit(rs.getFloat(4));
-				t.setTrans_acc_no(rs.getLong(5));
+				
 		         
 		         tt.add(t);
 		         
@@ -88,15 +90,41 @@ import com.slk.util.c_SDBUtil;
 		return tt;
 	}
 		
+		public List listLogin() {
+			employees = new ArrayList();
+			String query1="select username,password from c_agent";
+			Statement st1;
+			try {
+				st1 = con.createStatement();
+				ResultSet rs=st1.executeQuery(query1);
+				while(rs.next())
+				{
+					c_Employee e=new c_Employee();
+		
+			    
+			        
+			    
+			         e.setUsername(rs.getString(1));
+			         e.setPassword(rs.getString(2));
+			    
+				     employees.add(e);
+			} 
+			}catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			return employees;
+		}
+		
 
 		/**
 		 * Returns list of customers from dummy database.
 		 * 
 		 * @return list of customers
 		 */
-		public List list() {
+		public List list(String id) {
 			employees = new ArrayList();
-			String query1="select * from c_agent";
+			String query1="select agentid,name,a.address,dob,contact,username,password,mail,branch_name from c_agent a,c_branch b where a.branch_id=b.branch_id and a.username='"+id+"'";
 			Statement st1;
 			try {
 				st1 = con.createStatement();
@@ -113,7 +141,7 @@ import com.slk.util.c_SDBUtil;
 			         e.setUsername(rs.getString(6));
 			         e.setPassword(rs.getString(7));
 			         e.setEmpmail(rs.getString(8));
-			         e.setEmpbranch_id(rs.getInt(9));
+			         e.setEmpbranch(rs.getString(9));
 				     employees.add(e);
 			} 
 			}catch (SQLException e1) {
@@ -232,15 +260,15 @@ import com.slk.util.c_SDBUtil;
 		public c_Employee updateAgent(Long id, c_Employee e)  {
 			// TODO Auto-generated method stub
 			try {
-			String sql="update c_agent set name=?,address=?,dob=?,contact=?,mail=?,branch_id=? where agentid=?";
-			PreparedStatement pst=con.prepareStatement(sql);
-		    pst.setString(1, e.getEmpname());
-		    pst.setString(2, e.getAddress());
-		    pst.setString(3, e.getEmpdob());
-		    pst.setLong(4, e.getEmpcontact());
-		    pst.setString(5, e.getEmpmail());
-		    pst.setInt(6, e.getEmpbranch());
-		    pst.setLong(7,id);
+				String sql="update c_agent set name=?,address=?,dob=?,contact=?,mail=? where agentid=?";
+				PreparedStatement pst=con.prepareStatement(sql);
+			    pst.setString(1, e.getEmpname());
+			    pst.setString(2, e.getAddress());
+			    pst.setString(3, e.getEmpdob());
+			    pst.setLong(4, e.getEmpcontact());
+			    pst.setString(5, e.getEmpmail());
+			    
+			    pst.setLong(6,id);
 
 			int res=pst.executeUpdate();
 			if(res > 0){

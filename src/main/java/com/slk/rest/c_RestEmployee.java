@@ -28,20 +28,26 @@ public class c_RestEmployee {
 	@Autowired
 	c_EmployeeDAOImpl employeeDaoimpl= new c_EmployeeDAOImpl();
 	
-	@GetMapping("/c_agent")
-	public List getAgent()
+	@GetMapping("/c_agent1")
+	public List getAgentLogin()
 	{
-		return employeeDaoimpl.list();
+		return employeeDaoimpl.listLogin();
 	}
-	@GetMapping("/c_customer")
-	public List getCustomer() throws SQLException
+	@GetMapping("/c_agent/{id}")
+	public List getAgent(@PathVariable String id)
 	{
-		return employeeDaoimpl.getAllCustomer();
+		return employeeDaoimpl.list(id);
 	}
-	@GetMapping("/c_transaction")
-	public List getTransaction() throws SQLException
+	@GetMapping("/c_customer/{id}")
+	public List getCustomer(@PathVariable String id) throws SQLException
 	{
-		return employeeDaoimpl.getAllTransaction();
+		System.out.println(id);
+		return employeeDaoimpl.getAllCustomer(id);
+	}
+	@GetMapping("/c_transaction/{id}")
+	public List getTransaction(@PathVariable String id) throws SQLException
+	{
+		return employeeDaoimpl.getAllTransaction(id);
 	}
 	
 	@DeleteMapping("/delete/c_agent/{id}")

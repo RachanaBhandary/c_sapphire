@@ -19,12 +19,12 @@ public class c_Employee {
 	private String username;
 	private String password;
 	private String empmail;
-	private int empbranch;
-	public int getEmpbranch() {
+	private String empbranch;
+	public String getEmpbranch() {
 		return empbranch;
 	}
-	public void setEmpbranch(int empbranch) {
-		this.empbranch = empbranch;
+	public void setEmpbranch(String string) {
+		this.empbranch = string;
 	}
 	public String getEmpmail() {
 		return empmail;

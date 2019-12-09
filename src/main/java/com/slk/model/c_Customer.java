@@ -43,11 +43,11 @@ public class c_Customer {
 	public void setAmount(float amount) {
 		this.amount = amount;
 	}
-	public int getBranch() {
+	public String getBranch() {
 		return branch;
 	}
-	public void setBranch(int branch) {
-		this.branch = branch;
+	public void setBranch(String string) {
+		this.branch = string;
 	}
 	public String getLoan_type() {
 		return loan_type;
@@ -81,7 +81,7 @@ public class c_Customer {
 	private String username;
 	private String password;
 	private float amount;
-	private int branch;
+	private String branch;
 	
 	private String loan_type;
 	private long aadhar_card;
