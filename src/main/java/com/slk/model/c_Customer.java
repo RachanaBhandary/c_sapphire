@@ -1,6 +1,7 @@
 package com.slk.model;
 
 public class c_Customer {
+
 	public long getAccno() {
 		return accno;
 	}
@@ -25,17 +26,11 @@ public class c_Customer {
 	public void setContact(long contact) {
 		this.contact = contact;
 	}
-	public String getUsername() {
-		return username;
+	public String getAddress() {
+		return address;
 	}
-	public void setUsername(String username) {
-		this.username = username;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 	public float getAmount() {
 		return amount;
@@ -46,8 +41,14 @@ public class c_Customer {
 	public String getBranch() {
 		return branch;
 	}
-	public void setBranch(String string) {
-		this.branch = string;
+	public void setBranch(String branch) {
+		this.branch = branch;
+	}
+	public String getOpen_date() {
+		return open_date;
+	}
+	public void setOpen_date(String open_date) {
+		this.open_date = open_date;
 	}
 	public String getLoan_type() {
 		return loan_type;
@@ -73,27 +74,28 @@ public class c_Customer {
 	public void setAcc_type(String acc_type) {
 		this.acc_type = acc_type;
 	}
-	private long accno;
-	private String name;
-	private String dob;
-	
-	private long contact;
-	private String username;
-	private String password;
-	private float amount;
-	private String branch;
-	
-	private String loan_type;
-	private long aadhar_card;
-	private String pan_card;
-	private String acc_type;
-	private String action;
 	public String getAction() {
 		return action;
 	}
 	public void setAction(String action) {
 		this.action = action;
 	}
+	private long accno;
+	private String name;
+	private String dob;
+	
+	private long contact;
+	
+	private String address;
+	private float amount;
+	private String branch;
+	private String open_date;
+	private String loan_type;
+	private long aadhar_card;
+	private String pan_card;
+	private String acc_type;
+	private String action;
+
 	
 	
 
