@@ -23,7 +23,7 @@ import com.slk.util.c_SDBUtil;
 		// Dummy database. Initialize with some dummy values.
 	 Connection con;
 		private static List<c_Employee> employees;
-		
+		 
 	
          {
 			
@@ -71,7 +71,7 @@ import com.slk.util.c_SDBUtil;
 			// TODO Auto-generated method stub
 			
 			
-			String query1="select distinct(c.account_no),t.trans_date,t.credit,t.debit from c_customer c,c_agent a,c_branch b,c_transaction t where c.branch_id=b.branch_id and b.branch_id=a.branch_id and c.account_no=t.account_no and a.username='"+id+"'";
+			String query1="select account_no,c.name,date,time,debit,credit,t.balance,b.branch_name from transaction t,customer c,customer_account ca,employee e,employee_branch eb,branch b where t.account_no=ca.customer_Acc_no and ca.cust_id=c.cust_id and e.employee_id=eb.employee_id and eb.branch_id=b.branch_id and c.branch_id=b.branch_id and e.username='"+id+"'";
 			Statement st1=con.createStatement();
 			ResultSet rs=st1.executeQuery(query1);
 			List<c_Transaction> tt=new ArrayList<c_Transaction>();
@@ -79,9 +79,15 @@ import com.slk.util.c_SDBUtil;
 			{
 				c_Transaction t=new c_Transaction();
 				t.setTrans_acc_no(rs.getLong(1));
-				t.setTrans_date(rs.getString(2));
-				t.setTrans_credit(rs.getFloat(3));
-				t.setTrans_debit(rs.getFloat(4));
+				t.setTrans_name(rs.getString(2));
+				t.setTrans_date(rs.getString(3));
+				t.setTime(rs.getString(4));
+				t.setTrans_debit(rs.getFloat(5));
+				t.setTrans_credit(rs.getFloat(6));
+				t.setBalance(rs.getFloat(7));
+				t.setBranch_name(rs.getString(8));
+				
+				
 				
 		         
 		         tt.add(t);
