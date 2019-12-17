@@ -98,7 +98,7 @@ import com.slk.util.c_SDBUtil;
 		
 		public List listLogin() {
 			employees = new ArrayList();
-			String query1="select username,password from employee where role='branch manager'";
+			String query1="select username,password from employee where employee_role='branch manager'";
 			Statement st1;
 			try {
 				st1 = con.createStatement();
