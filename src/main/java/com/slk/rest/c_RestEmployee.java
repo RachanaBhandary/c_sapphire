@@ -44,6 +44,12 @@ public class c_RestEmployee {
 		System.out.println(id);
 		return employeeDaoimpl.getAllCustomer(id);
 	}
+	@GetMapping("/c_customer1/{id}")
+	public List getCustomer1(@PathVariable String id,String id1) throws SQLException
+	{
+		System.out.println(id);
+		return employeeDaoimpl.getAllCustomer1(id,id1);
+	}
 	@GetMapping("/c_transaction/{id}")
 	public List getTransaction(@PathVariable String id) throws SQLException
 	{

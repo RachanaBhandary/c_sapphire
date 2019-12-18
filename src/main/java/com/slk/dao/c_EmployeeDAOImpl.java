@@ -90,15 +90,45 @@ import com.slk.util.c_SDBUtil;
 				t.setTrans_debit(rs.getFloat(5));
 				t.setTrans_credit(rs.getFloat(6));
 				t.setBalance(rs.getFloat(7));
-				t.setBranch_name(rs.getString(8));
-				
-				
-				
-		         
+				t.setBranch_name(rs.getString(8));		         
 		         tt.add(t);
 		         
 		    }
 		return tt;
+	}
+		
+		public List<c_Customer> getAllCustomer1(String id,String id1) throws SQLException {
+			// TODO Auto-generated method stub
+			long id2=Long.parseLong(id1);
+			String query1="select customer_Acc_no,c.name, c.dob, c.contact,address,aadhar_number, pan_number,branch_name,acc_type,loan_type,ca.open_date,ca.balance,ca.approval from customer c,branch b,customer_account ca,loanaccount la,loan l,account a,employee e,employee_branch eb where c.cust_id=ca.cust_id and c.branch_id=b.branch_id and la.cust_id=c.cust_id and la.loan_id=l.loan_id and a.account_id=ca.account_id and e.employee_id=eb.employee_id and eb.branch_id=b.branch_id and e.username='"+id+"' and c.customer_Acc_no="+id2+"";
+			Statement st1=con.createStatement();
+			ResultSet rs=st1.executeQuery(query1);
+			List<c_Customer> l=new ArrayList<c_Customer>();
+			while(rs.next())
+			{
+				c_Customer c=new c_Customer();
+			    c.setAccno(rs.getLong(1));
+		         c.setName(rs.getString(2));
+		         c.setDob(rs.getString(3));
+		         c.setContact(rs.getLong(4));
+		         c.setAddress(rs.getString(5));
+		         c.setAadhar_card(rs.getLong(6));
+		         c.setPan_card(rs.getString(7));
+		         c.setBranch(rs.getString(8));
+		         c.setAcc_type(rs.getString(9));
+		         c.setLoan_type(rs.getString(10));
+		         c.setOpen_date(rs.getString(11));
+		         c.setAmount(rs.getFloat(12));
+		         
+		      
+		        
+		    
+		        
+		         c.setAction(rs.getString(13));
+		         l.add(c);
+		         
+		    }
+		return l;
 	}
 		
 		public List listLogin() {
