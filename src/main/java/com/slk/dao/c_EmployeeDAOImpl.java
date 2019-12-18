@@ -165,7 +165,7 @@ import com.slk.util.c_SDBUtil;
 		 */
 		public List list(String id) {
 			employees = new ArrayList();
-			String query1="select employee.employee_id,employee_name,dob,contact,mail,username,password,branch_name from employee,employee_branch,branch where employee.employee_id=employee_branch.employee_id and branch.branch_id=employee_branch.branch_id  and a.username='"+id+"'";
+			String query1="select employee.employee_id,employee_name,dob,contact,mail,username,password,branch_name from employee,employee_branch,branch where employee.employee_id=employee_branch.employee_id and branch.branch_id=employee_branch.branch_id  and employee.username='"+id+"'";
 			Statement st1;
 			try {
 				st1 = con.createStatement();
@@ -190,7 +190,7 @@ import com.slk.util.c_SDBUtil;
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			return null;
+			return employees;
 		}
 		
 	/*	public Employee update(Long id, Employee employee) {
