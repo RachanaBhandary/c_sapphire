@@ -164,8 +164,8 @@ import com.slk.util.c_SDBUtil;
 		 * @return list of customers
 		 */
 		public List list(String id) {
-			/*employees = new ArrayList();
-			String query1="select agentid,name,a.address,dob,contact,username,password,mail,branch_name from c_agent a,c_branch b where a.branch_id=b.branch_id and a.username='"+id+"'";
+			employees = new ArrayList();
+			String query1="select employee.employee_id,employee_name,dob,contact,mail,username,password,branch_name from employee,employee_branch,branch where employee.employee_id=employee_branch.employee_id and branch.branch_id=employee_branch.branch_id  and a.username='"+id+"'";
 			Statement st1;
 			try {
 				st1 = con.createStatement();
@@ -175,20 +175,21 @@ import com.slk.util.c_SDBUtil;
 					c_Employee e=new c_Employee();
 					 e.setEmpid(rs.getString(1));
 			         e.setEmpname(rs.getString(2));
-			         e.setAddress(rs.getString(3));
-			         e.setEmpdob(rs.getString(4));
+			      
+			         e.setEmpdob(rs.getString(3));
 			        
-			         e.setEmpcontact(rs.getLong(5));
+			         e.setEmpcontact(rs.getLong(4));
+			         e.setEmpmail(rs.getString(5));
 			         e.setUsername(rs.getString(6));
 			         e.setPassword(rs.getString(7));
-			         e.setEmpmail(rs.getString(8));
-			         e.setEmpbranch(rs.getString(9));
+			         
+			         e.setEmpbranch(rs.getString(8));
 				     employees.add(e);
 			} 
 			}catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
-			}*/
+			}
 			return null;
 		}
 		
