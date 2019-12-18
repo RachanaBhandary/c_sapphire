@@ -164,7 +164,7 @@ import com.slk.util.c_SDBUtil;
 		 * @return list of customers
 		 */
 		public List list(String id) {
-			employees = new ArrayList();
+			/*employees = new ArrayList();
 			String query1="select agentid,name,a.address,dob,contact,username,password,mail,branch_name from c_agent a,c_branch b where a.branch_id=b.branch_id and a.username='"+id+"'";
 			Statement st1;
 			try {
@@ -188,8 +188,8 @@ import com.slk.util.c_SDBUtil;
 			}catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
-			}
-			return employees;
+			}*/
+			return null;
 		}
 		
 	/*	public Employee update(Long id, Employee employee) {
