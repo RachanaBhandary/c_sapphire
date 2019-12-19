@@ -283,7 +283,7 @@ import com.slk.util.c_SDBUtil;
 		 
 		public c_Customer update(Long id, c_Customer c) {
 
-			String query1="Update c_customer set action=? where account_no=?";
+			String query1="Update customer_account set approval=? where  customer_Acc_no=?";
 			PreparedStatement st1;
 			
 			try {
@@ -300,7 +300,7 @@ import com.slk.util.c_SDBUtil;
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			return null;
+			return c;
 		}
 		
 		public c_Employee updateAgent(Long id, c_Employee e)  {
