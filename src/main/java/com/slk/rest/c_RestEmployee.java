@@ -98,7 +98,7 @@ public class c_RestEmployee {
 	}
 	@PutMapping("/put/c_agent/{id}")
 	 // System.out.println("ggasgcs");
-	public ResponseEntity updateAgent(@PathVariable Long id, @RequestBody c_Employee e) {
+	public ResponseEntity updateAgent(@PathVariable String id, @RequestBody c_Employee e) {
 
   
   	System.out.println("agent "+e);
