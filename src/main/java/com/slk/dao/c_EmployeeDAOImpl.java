@@ -256,7 +256,7 @@ import com.slk.util.c_SDBUtil;
 		 
 		public List listloan(String id) {
 			loan = new ArrayList();
-			String query1="select lo.loan_Acc_no,lo.balance,lo.open_date,la.loan_type,cm.name,c.customer_Acc_no,br.branch_name,lo.approval from customer cm,customer_account c, loanaccount lo, employee_branch eb,employee e, loan la,branch br where br.branch_id=eb.branch_id and cm.cust_id=c.cust_id and lo.account_no=c.customer_Acc_no and lo.branch_id  = eb.branch_id and la.loan_id = lo.loan_id and e.username='"+id+"';";
+			String query1="select lo.loan_Acc_no,lo.balance,lo.open_date,la.loan_type,cm.name,c.customer_Acc_no,br.branch_name,lo.approval from customer cm,customer_account c, loanaccount lo, employee_branch eb,employee e, loan la,branch br where br.branch_id=eb.branch_id and cm.cust_id=c.cust_id and lo.account_no=c.customer_Acc_no and lo.branch_id  = eb.branch_id and la.loan_id = lo.loan_id and e.username='"+id+"' and  lo.approval<>'Disapprove';";
 
 			Statement st1;
 			try {
