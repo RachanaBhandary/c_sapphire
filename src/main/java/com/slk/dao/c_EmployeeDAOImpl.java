@@ -370,13 +370,12 @@ import com.slk.util.c_SDBUtil;
 			// TODO Auto-generated method stub
 		
 			try {
-				String sql="update c_employee set employee_name=?,dob=?,contact=?,mail=? where employee_id=?";
+				String sql="update employee set employee_name=?,dob=?,contact=?,mail=? where employee_id=?";
 				PreparedStatement pst=con.prepareStatement(sql);
 			    pst.setString(1, e.getEmpname());
 			    pst.setString(2, e.getEmpdob());
 			    pst.setLong(3, e.getEmpcontact());
 			    pst.setString(4, e.getEmpmail());
-			    
 			    pst.setString(5,id);
 
 			int res=pst.executeUpdate();
