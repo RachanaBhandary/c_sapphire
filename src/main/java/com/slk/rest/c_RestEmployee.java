@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.slk.dao.c_EmployeeDAOImpl;
 import com.slk.model.c_Customer;
 import com.slk.model.c_Employee;
+import com.slk.model.c_loan;
 
 import ch.qos.logback.core.net.SyslogOutputStream;
 
@@ -77,6 +78,17 @@ public class c_RestEmployee {
 	public ResponseEntity updateCustomer(@PathVariable Long id, @RequestBody c_Customer c) {
       System.out.println("ggasgcs");
 		c =employeeDaoimpl.update(id, c);
+
+		if (null == c) {
+			return new ResponseEntity("No Customer found for ID " + id, HttpStatus.NOT_FOUND);
+		}
+
+		return new ResponseEntity(c, HttpStatus.OK);
+	}
+	@PutMapping("/put/c_loan/{id}")
+	public ResponseEntity updateLoan(@PathVariable String id, @RequestBody c_loan c) {
+      System.out.println("ggasgcs");
+		c =employeeDaoimpl.updateLoan(id, c);
 
 		if (null == c) {
 			return new ResponseEntity("No Customer found for ID " + id, HttpStatus.NOT_FOUND);

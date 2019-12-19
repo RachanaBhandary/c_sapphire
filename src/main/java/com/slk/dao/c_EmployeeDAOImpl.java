@@ -334,29 +334,30 @@ import com.slk.util.c_SDBUtil;
 			return c;
 		}
 		 
-		public c_loan updateLoan(Long id, c_loan c) {
+		public c_loan updateLoan(String id, c_loan c) {
 
-			String query1="select lo.loan_Acc_no,lo.balance,lo.open_date,la.loan_type,cm.name,c.customer_Acc_no,br.branch_name,lo.approval from customer cm,customer_account c, loanaccount lo, employee_branch eb, loan la,branch br where br.branch_id=eb.branch_id and cm.cust_id=c.cust_id and lo.account_no=c.customer_Acc_no and lo.branch_id  = eb.branch_id and la.loan_id = lo.loan_id ";
+			String query1="update loanaccount set approval=? where loan_Acc_no=?";
 			PreparedStatement st1;
 			
 			try {
 				st1 = con.prepareStatement(query1);
 			    //System.out.println(c.getAction());
-			    st1.setString(1, c.getLoan_Acc_no());
-			    st1.setFloat(1, c.getBalance());
-			    st1.setString(3, c.getOpen_date());
-			    st1.setString(4,c.getLoan_type());
-			    st1.setString(5, c.getName());
-			    st1.setLong(6, c.getCustoner_Acc_no());
-			    st1.setString(7, c.getBranch_name());
-			    st1.setString(8, c.getApproval());
-		
-			   
-			
+				st1 = con.prepareStatement(query1);
+			    System.out.println(id);
+				st1.setString(1,c.getApproval());
+				st1.setString(2,id);
 				int rs=st1.executeUpdate();
 				System.out.println(rs+"Rows Updated");
 				
 				return c;
+			   
+		
+			   
+			
+				
+				
+				
+			
 				
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block

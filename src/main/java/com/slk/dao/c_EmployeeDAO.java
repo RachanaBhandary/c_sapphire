@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.slk.model.c_Customer;
 import com.slk.model.c_Employee;
 import com.slk.model.c_Transaction;
+import com.slk.model.c_loan;
 @Repository
 public interface c_EmployeeDAO {
 	public List listLogin();
@@ -19,4 +20,5 @@ public interface c_EmployeeDAO {
 	public c_Employee updateAgent(Long id, c_Employee e);
 	public List<c_Customer> getAllCustomer1(String id,String id1) throws SQLException ;
 	public List listloan(String id);
+	public c_loan updateLoan(String id, c_loan c);
 }
