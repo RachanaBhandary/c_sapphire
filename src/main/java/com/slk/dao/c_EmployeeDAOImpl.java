@@ -366,7 +366,7 @@ import com.slk.util.c_SDBUtil;
 			return c;
 		}
 		
-		public c_Employee updateAgent(Long id, c_Employee e)  {
+		public c_Employee updateAgent(String id, c_Employee e)  {
 			// TODO Auto-generated method stub
 		
 			try {
@@ -377,7 +377,7 @@ import com.slk.util.c_SDBUtil;
 			    pst.setLong(3, e.getEmpcontact());
 			    pst.setString(4, e.getEmpmail());
 			    
-			    pst.setLong(5,id);
+			    pst.setString(5,id);
 
 			int res=pst.executeUpdate();
 			if(res > 0){
