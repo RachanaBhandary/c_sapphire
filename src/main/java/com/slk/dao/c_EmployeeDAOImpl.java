@@ -169,7 +169,7 @@ import com.slk.util.c_SDBUtil;
 		 */
 		public List list(String id) {
 			employees = new ArrayList();
-			String query1="select employee.employee_id,employee_name,dob,contact,mail,username,password,branch_name from employee,employee_branch,branch where employee.employee_id=employee_branch.employee_id and branch.branch_id=employee_branch.branch_id  and employee.username='"+id+"'";
+			String query1="select employee_name,dob,contact,mail,branch_name from employee,employee_branch,branch where employee.employee_id=employee_branch.employee_id and branch.branch_id=employee_branch.branch_id  and employee.username='"+id+"'";
 			Statement st1;
 			try {
 				st1 = con.createStatement();
@@ -177,17 +177,16 @@ import com.slk.util.c_SDBUtil;
 				while(rs.next())
 				{
 					c_Employee e=new c_Employee();
-					 e.setEmpid(rs.getString(1));
-			         e.setEmpname(rs.getString(2));
-			      
+			
+			         e.setEmpname(rs.getString(1));
+			         e.setEmpcontact(rs.getLong(2));
 			         e.setEmpdob(rs.getString(3));
 			        
-			         e.setEmpcontact(rs.getLong(4));
-			         e.setEmpmail(rs.getString(5));
-			         e.setUsername(rs.getString(6));
-			         e.setPassword(rs.getString(7));
+			    
+			         e.setEmpmail(rs.getString(4));
+			  
 			         
-			         e.setEmpbranch(rs.getString(8));
+			         e.setEmpbranch(rs.getString(5));
 				     employees.add(e);
 			} 
 			}catch (SQLException e1) {
