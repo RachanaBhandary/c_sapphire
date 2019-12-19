@@ -15,6 +15,7 @@ import org.springframework.stereotype.Repository;
 import com.slk.model.c_Customer;
 import com.slk.model.c_Employee;
 import com.slk.model.c_Transaction;
+import com.slk.model.c_loan;
 import com.slk.util.c_SDBUtil;
 
 @Repository
@@ -23,6 +24,7 @@ import com.slk.util.c_SDBUtil;
 		// Dummy database. Initialize with some dummy values.
 	 Connection con;
 		private static List<c_Employee> employees;
+		private static List<c_loan> loan;
 		 
 	
          {
@@ -252,6 +254,35 @@ import com.slk.util.c_SDBUtil;
 		 *            the customer id
 		 * @return id of deleted customer object*/
 		 
+		public List listloan(String id) {
+			loan = new ArrayList();
+			String query1="select lo.loan_Acc_no,lo.balance,lo.open_date,la.loan_type,cm.name,c.customer_Acc_no,br.branch_name,lo.approval from customer cm,customer_account c, loanaccount lo, employee_branch eb,employee e, loan la,branch br where br.branch_id=eb.branch_id and cm.cust_id=c.cust_id and lo.account_no=c.customer_Acc_no and lo.branch_id  = eb.branch_id and la.loan_id = lo.loan_id and e.username='"+id+"';";
+
+			Statement st1;
+			try {
+				st1 = con.createStatement();
+				ResultSet rs=st1.executeQuery(query1);
+				while(rs.next())
+				{
+					c_loan c=new c_loan();
+					  c.setLoan_Acc_no(rs.getString(1));
+					   c.setBalance(rs.getFloat(2));
+					   c.setOpen_date(rs.getString(3));
+					    c.setLoan_type(rs.getString(4));
+					    c.setName(rs.getString(5));
+					    c.setCustoner_Acc_no(rs.getLong(6));
+					    c.setBranch_name(rs.getString(7));
+					    c.setApproval(rs.getString(8));
+				
+				     loan.add(c);
+			} 
+			}catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			return loan;
+		}
+		
 		public String delete(String id) {
 
 			String query1="Delete from c_agent where agentid=?";
@@ -291,6 +322,37 @@ import com.slk.util.c_SDBUtil;
 			    System.out.println(c.getAction());
 				st1.setString(1,c.getAction());
 				st1.setLong(2,id);
+				int rs=st1.executeUpdate();
+				System.out.println(rs+"Rows Updated");
+				
+				return c;
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return c;
+		}
+		 
+		public c_loan updateLoan(Long id, c_loan c) {
+
+			String query1="select lo.loan_Acc_no,lo.balance,lo.open_date,la.loan_type,cm.name,c.customer_Acc_no,br.branch_name,lo.approval from customer cm,customer_account c, loanaccount lo, employee_branch eb, loan la,branch br where br.branch_id=eb.branch_id and cm.cust_id=c.cust_id and lo.account_no=c.customer_Acc_no and lo.branch_id  = eb.branch_id and la.loan_id = lo.loan_id ";
+			PreparedStatement st1;
+			
+			try {
+				st1 = con.prepareStatement(query1);
+			    //System.out.println(c.getAction());
+			    st1.setString(1, c.getLoan_Acc_no());
+			    st1.setFloat(1, c.getBalance());
+			    st1.setString(3, c.getOpen_date());
+			    st1.setString(4,c.getLoan_type());
+			    st1.setString(5, c.getName());
+			    st1.setLong(6, c.getCustoner_Acc_no());
+			    st1.setString(7, c.getBranch_name());
+			    st1.setString(8, c.getApproval());
+		
+			   
+			
 				int rs=st1.executeUpdate();
 				System.out.println(rs+"Rows Updated");
 				
