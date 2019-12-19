@@ -42,7 +42,7 @@ import com.slk.util.c_SDBUtil;
 		
 		public List<c_Customer> getAllCustomer(String id) throws SQLException {
 			// TODO Auto-generated method stub
-			String query1="select customer_Acc_no,c.name, c.dob, c.contact,address,aadhar_number, pan_number,branch_name,acc_type,loan_type,ca.open_date,ca.balance,ca.approval from customer c,branch b,customer_account ca,loanaccount la,loan l,account a,employee e,employee_branch eb where c.cust_id=ca.cust_id and c.branch_id=b.branch_id and la.cust_id=c.cust_id and la.loan_id=l.loan_id and a.account_id=ca.account_id and e.employee_id=eb.employee_id and eb.branch_id=b.branch_id and e.username='"+id+"'";
+			String query1="select  customer_Acc_no,c.name, c.dob, c.contact,address,aadhar_number, pan_number,branch_name,a.acc_type,ca.open_date,ca.balance,ca.approval from  customer c,employee_branch eb,branch b,customer_account ca,account a,employee e where eb.branch_id =c.branch_id and b.branch_id=c.branch_id and ca.cust_id=c.cust_id and a.account_id=ca.account_id and e.username='"+id+"'";
 			Statement st1=con.createStatement();
 			ResultSet rs=st1.executeQuery(query1);
 			List<c_Customer> l=new ArrayList<c_Customer>();
@@ -58,15 +58,15 @@ import com.slk.util.c_SDBUtil;
 		         c.setPan_card(rs.getString(7));
 		         c.setBranch(rs.getString(8));
 		         c.setAcc_type(rs.getString(9));
-		         c.setLoan_type(rs.getString(10));
-		         c.setOpen_date(rs.getString(11));
-		         c.setAmount(rs.getFloat(12));
+		         
+		         c.setOpen_date(rs.getString(10));
+		         c.setAmount(rs.getFloat(11));
 		         
 		      
 		        
 		    
 		        
-		         c.setAction(rs.getString(13));
+		         c.setAction(rs.getString(12));
 		         l.add(c);
 		         
 		    }
@@ -131,6 +131,8 @@ import com.slk.util.c_SDBUtil;
 		return l;
 	}
 		
+		
+		
 		public List listLogin() {
 			employees = new ArrayList();
 			String query1="select username,password from employee where employee_role='branch manager'";
@@ -192,6 +194,8 @@ import com.slk.util.c_SDBUtil;
 			}
 			return employees;
 		}
+		
+	
 		
 	/*	public Employee update(Long id, Employee employee) {
 
@@ -301,16 +305,16 @@ import com.slk.util.c_SDBUtil;
 		
 		public c_Employee updateAgent(Long id, c_Employee e)  {
 			// TODO Auto-generated method stub
+		
 			try {
-				String sql="update c_agent set name=?,address=?,dob=?,contact=?,mail=? where agentid=?";
+				String sql="update c_employee set employee_name=?,dob=?,contact=?,mail=? where employee_id=?";
 				PreparedStatement pst=con.prepareStatement(sql);
 			    pst.setString(1, e.getEmpname());
-			    pst.setString(2, e.getAddress());
-			    pst.setString(3, e.getEmpdob());
-			    pst.setLong(4, e.getEmpcontact());
-			    pst.setString(5, e.getEmpmail());
+			    pst.setString(2, e.getEmpdob());
+			    pst.setLong(3, e.getEmpcontact());
+			    pst.setString(4, e.getEmpmail());
 			    
-			    pst.setLong(6,id);
+			    pst.setLong(5,id);
 
 			int res=pst.executeUpdate();
 			if(res > 0){
